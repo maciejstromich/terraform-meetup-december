@@ -54,6 +54,7 @@ resource "aws_instance" "web" {
     subnet_id = "${data.aws_subnet.selected.id}"
     ami = "${data.aws_ami.ubuntu.id}"
     instance_type = "t2.micro"
+    user_data = "apt-get update; apt-get install -y nginx ;echo \"This was amazing\" > /usr/share/nginx/html/index.html"
     tags {
         Name = "${var.shortname}"
     }
