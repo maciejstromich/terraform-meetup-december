@@ -16,4 +16,4 @@ terraform remote config \
 terraform get
 terraform apply
 
-aws s3 cp s3://${REMOTE_STATE_BUCKET}/${REMOTE_STATE_FILE} s3://${REMOTE_STATE_BUCKET}/old_${REMOTE_STATE_FILE}
+#aws s3 cp s3://${REMOTE_STATE_BUCKET}/${REMOTE_STATE_FILE} s3://${REMOTE_STATE_BUCKET}/old_${REMOTE_STATE_FILE}

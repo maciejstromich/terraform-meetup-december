@@ -9,10 +9,8 @@ variable "shortname" {
 
 variable "vpc_cidr" {
   description = "The CIDR of the network created in the VPC"
-  default     = "172.16.0.0/16"
 }
 
 variable "subnet_cidr" {
   description = "The CIDR of the subnet created in the VPC"
-  default     = "172.16.1.0/24"
 }

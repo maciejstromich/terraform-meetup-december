@@ -1,5 +1,4 @@
 #Terraform
-**/*.tfvars
 **/*.backup
 **/.terraform/
 **/*.tfstate # We serve state remotely so no need to have it in repository
