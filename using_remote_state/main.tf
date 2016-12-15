@@ -7,12 +7,13 @@ provider "aws" {
 ## Remote states
 
 data "terraform_remote_state" "vpc" {
-    backend = "s3"
-    config {
-        bucket     = "tfmeetup-remote-state"
-        key        = "mystate.tfstate"
-        region     = "us-west-2"
-    }
+  backend = "s3"
+  config {
+    # ******** PLEASE DO NOT FORGET TO CHANGE ME AS WELL ********
+    bucket = "tfmeetup-remote-state"
+    key    = "mystate.tfstate"
+    region = "us-west-2"
+  }
 }
 
 data "aws_subnet" "selected" {
@@ -22,11 +23,11 @@ data "aws_subnet" "selected" {
 data "aws_ami" "ubuntu" {
   most_recent = true
   filter {
-    name = "name"
+    name   = "name"
     values = ["ubuntu/images/hvm-ssd/ubuntu-trusty-14.04-amd64-server-*"]
   }
   filter {
-    name = "virtualization-type"
+    name   = "virtualization-type"
     values = ["hvm"]
   }
   owners = ["099720109477"] # Canonical
@@ -47,15 +48,22 @@ resource "aws_security_group" "web" {
     to_port     = 80
     protocol    = "tcp"
   }
+  egress {
+    from_port   = 0
+    to_port     = 0
+    protocol    = "-1"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
 }
 
 resource "aws_instance" "web" {
-    vpc_security_group_ids = ["${aws_security_group.web.id}"]
-    subnet_id = "${data.aws_subnet.selected.id}"
-    ami = "${data.aws_ami.ubuntu.id}"
-    instance_type = "t2.micro"
-    user_data = "apt-get update; apt-get install -y nginx ;echo \"This was amazing\" > /usr/share/nginx/html/index.html"
-    tags {
-        Name = "${var.shortname}"
-    }
+  vpc_security_group_ids = ["${aws_security_group.web.id}"]
+  subnet_id              = "${data.aws_subnet.selected.id}"
+  ami                    = "${data.aws_ami.ubuntu.id}"
+  instance_type          = "t2.micro"
+  user_data              = "${file("userdata.sh")}"
+  tags {
+    Name       = "${var.shortname}"
+    created_by = "terraform"
+  }
 }
