@@ -1,6 +1,6 @@
 #!/bin/bash
 
-REMOTE_STATE_BUCKET="tfmeetup-remote-state-nik"
+REMOTE_STATE_BUCKET="tfmeetup-remote-state"
 REMOTE_STATE_FILE="mystate.tfstate"
 REGION="us-west-2"
 
