@@ -1,6 +1,6 @@
 variable "region" {
   description = "The AWS region"
-  default = "us-west-2"
+  default     = "us-west-2"
 }
 
 variable "private_zone_enabled" {
