@@ -1,6 +1,10 @@
 variable "region" {
   description = "The AWS region"
 }
+variable "aws_profile" {
+  description = "AWS Profile to use"
+  default = "terraform"
+}
 
 variable "shortname" {
   description = "The name for everything related to this setup"
