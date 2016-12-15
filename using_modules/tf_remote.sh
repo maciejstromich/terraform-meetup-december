@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 REMOTE_STATE_BUCKET="tfmeetup-remote-state"
 REMOTE_STATE_FILE="mystate.tfstate"
